@@ -1,17 +1,15 @@
-import mongoose from 'mongoose';
+import { connectDatabase, mongoUri } from '../config/database.ts';
 import User from '../models/User.ts';
 import Team from '../models/Team.ts';
 import Activity from '../models/Activity.ts';
 import LeaderboardEntry from '../models/LeaderboardEntry.ts';
 import Workout from '../models/Workout.ts';
 
-const MONGO_URI = process.env.MONGO_URI ?? 'mongodb://localhost:27017/octofit_db';
-
 async function seedDatabase() {
   console.log('Seed the octofit_db database with test data');
 
-  await mongoose.connect(MONGO_URI);
-  console.log(`Connected to MongoDB at ${MONGO_URI}`);
+  await connectDatabase();
+  console.log(`Connected to MongoDB at ${mongoUri}`);
 
   await Promise.all([
     User.deleteMany({}),

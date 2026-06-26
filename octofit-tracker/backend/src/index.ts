@@ -1,14 +1,13 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import User from './models/User.ts';
 import Team from './models/Team.ts';
 import Activity from './models/Activity.ts';
 import LeaderboardEntry from './models/LeaderboardEntry.ts';
 import Workout from './models/Workout.ts';
+import { connectDatabase, mongoUri } from './config/database.ts';
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 8000);
-const MONGO_URI = process.env.MONGO_URI ?? 'mongodb://localhost:27017/octofit_db';
 const CODESPACE_NAME = process.env.CODESPACE_NAME;
 const API_BASE_URL = CODESPACE_NAME
   ? `https://${CODESPACE_NAME}-8000.githubpreview.dev`
@@ -53,14 +52,14 @@ app.get('/api/config', (_req, res) => {
   });
 });
 
-mongoose.connect(MONGO_URI)
+connectDatabase()
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server listening on http://localhost:${PORT}`);
       if (CODESPACE_NAME) {
         console.log(`Codespaces API URL: ${API_BASE_URL}`);
       }
-      console.log(`MongoDB connected at ${MONGO_URI}`);
+      console.log(`MongoDB connected at ${mongoUri}`);
     });
   })
   .catch((error) => {
