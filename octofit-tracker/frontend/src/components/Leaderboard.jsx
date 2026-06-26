@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getApiUrl, normalizeResponse } from '../api.js';
+import { normalizeResponse } from '../api.js';
+
+const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME;
+const API_BASE = CODESPACE_NAME
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
+  : 'http://localhost:8000';
+const LEADERBOARD_ENDPOINT = `${API_BASE}/api/leaderboard/`;
 
 function Leaderboard() {
   const [scores, setScores] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(getApiUrl('/api/leaderboard/'))
+    fetch(LEADERBOARD_ENDPOINT)
       .then((response) => response.json())
       .then((data) => setScores(normalizeResponse(data.leaderboard ?? data)))
       .catch((error) => setError(error.message));

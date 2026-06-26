@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react';
-import { getApiUrl, normalizeResponse } from '../api.js';
+import { normalizeResponse } from '../api.js';
+
+const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME;
+const API_BASE = CODESPACE_NAME
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
+  : 'http://localhost:8000';
+const WORKOUTS_ENDPOINT = `${API_BASE}/api/workouts/`;
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(getApiUrl('/api/workouts/'))
+    fetch(WORKOUTS_ENDPOINT)
       .then((response) => response.json())
       .then((data) => setWorkouts(normalizeResponse(data.workouts ?? data)))
       .catch((error) => setError(error.message));
