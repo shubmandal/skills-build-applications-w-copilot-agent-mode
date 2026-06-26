@@ -1,9 +1,10 @@
-import { connectDatabase, mongoUri } from '../config/database.ts';
-import User from '../models/User.ts';
-import Team from '../models/Team.ts';
-import Activity from '../models/Activity.ts';
-import LeaderboardEntry from '../models/LeaderboardEntry.ts';
-import Workout from '../models/Workout.ts';
+import mongoose from 'mongoose';
+import { connectDatabase, mongoUri } from '../config/database.js';
+import User from '../models/User.js';
+import Team from '../models/Team.js';
+import Activity from '../models/Activity.js';
+import LeaderboardEntry from '../models/LeaderboardEntry.js';
+import Workout from '../models/Workout.js';
 
 async function seedDatabase() {
   console.log('Seed the octofit_db database with test data');

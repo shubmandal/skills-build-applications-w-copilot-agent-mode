@@ -1,10 +1,10 @@
 import express from 'express';
-import User from './models/User.ts';
-import Team from './models/Team.ts';
-import Activity from './models/Activity.ts';
-import LeaderboardEntry from './models/LeaderboardEntry.ts';
-import Workout from './models/Workout.ts';
-import { connectDatabase, mongoUri } from './config/database.ts';
+import User from './models/User.js';
+import Team from './models/Team.js';
+import Activity from './models/Activity.js';
+import LeaderboardEntry from './models/LeaderboardEntry.js';
+import Workout from './models/Workout.js';
+import { connectDatabase, mongoUri } from './config/database.js';
 
 const app = express();
 const PORT = Number(process.env.PORT ?? 8000);
