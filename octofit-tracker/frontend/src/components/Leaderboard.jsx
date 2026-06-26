@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { normalizeResponse } from '../api.js';
 
-const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME;
-const API_BASE = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-const LEADERBOARD_ENDPOINT = `${API_BASE}/api/leaderboard/`;
+const LEADERBOARD_ENDPOINT = `${
+  import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+    : 'http://localhost:8000'
+}/api/leaderboard/`;
 
 function Leaderboard() {
   const [scores, setScores] = useState([]);

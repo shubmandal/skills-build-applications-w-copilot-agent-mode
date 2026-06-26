@@ -3,6 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
     "outDir": "./dist",
     "esModuleInterop": true,
     "strict": true,

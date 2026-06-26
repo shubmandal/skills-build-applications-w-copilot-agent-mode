@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { normalizeResponse } from '../api.js';
 
-const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME;
-const API_BASE = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-const ACTIVITIES_ENDPOINT = `${API_BASE}/api/activities/`;
+const ACTIVITIES_ENDPOINT = `${
+  import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+    : 'http://localhost:8000'
+}/api/activities/`;
 
 function Activities() {
   const [activities, setActivities] = useState([]);

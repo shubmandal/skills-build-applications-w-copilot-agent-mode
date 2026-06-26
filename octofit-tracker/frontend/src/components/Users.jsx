@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { normalizeResponse } from '../api.js';
 
-const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME;
-const API_BASE = CODESPACE_NAME
-  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
-  : 'http://localhost:8000';
-const USERS_ENDPOINT = `${API_BASE}/api/users/`;
+const USERS_ENDPOINT = `${
+  import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev`
+    : 'http://localhost:8000'
+}/api/users/`;
 
 function Users() {
   const [users, setUsers] = useState([]);
